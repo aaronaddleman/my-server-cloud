@@ -1,0 +1,5 @@
+/cookbooks/
+/Berks-cookbooks/
+/.kitchen/
+/.vagrant/
+/.chef/trusted_certs/

@@ -1,0 +1,13 @@
+{
+  "fqdn": "10.33.33.33",
+  "chef-server": {
+    // "version": "12.1.0",
+    "api_fqdn": "10.33.33.33",
+    "configuration": {
+      "notification_email": "aaronaddleman@gmail.com"
+    }
+  },
+  "run_list": [
+    "recipe[chef-server]"
+  ]
+}
