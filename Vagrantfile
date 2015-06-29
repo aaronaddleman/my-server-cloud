@@ -11,6 +11,42 @@ Chef::Config.from_file(File.join(File.dirname(__FILE__), '.chef', 'knife.rb'))
 # read the settings from the node and use them below when defining chef options for vagrant provisioning
 chef_server_json = JSON.parse(Pathname(__FILE__).dirname.join('nodes', 'chef-server.example.com.json').read)
 
+# script to create organizations and user accounts
+$user_and_org = <<SCRIPT
+chef-server-ctl user-create aaddleman Aaron Addleman aaronaddleman@gmail.com changeme --filename /tmp/aaron.pem
+chef-server-ctl org-create short_name ninthport --association_user aaddleman --filename FILE_NAME
+SCRIPT
+
+# management console
+$management_console = <<SCRIPT
+chef-server-ctl install opscode-manage
+opscode-manage-ctl reconfigure
+chef-server-ctl reconfigure
+SCRIPT
+
+# push jobs
+$push_jobs = <<SCRIPT
+chef-server-ctl install opscode-push-jobs-server
+opscode-push-jobs-server-ctl reconfigure
+chef-server-ctl reconfigure
+SCRIPT
+
+# replication
+$replication = <<SCRIPT
+chef-server-ctl install chef-sync
+chef-sync-ctl reconfigure
+chef-server-ctl reconfigure
+SCRIPT
+
+# chef reporting
+$reporting = <<SCRIPT
+chef-server-ctl install opscode-reporting
+opscode-reporting-ctl reconfigure
+chef-server-ctl reconfigure
+SCRIPT
+
+
+
 Vagrant.configure(2) do |config|
 
   config.vm.provider "virtualbox" do |v|
@@ -18,12 +54,33 @@ Vagrant.configure(2) do |config|
     v.cpus = 1
   end
 
+  if Vagrant.has_plugin?("vagrant-cachier")
+    # Configure cached packages to be shared between instances of the same base box.
+    # More info on the "Usage" link above
+    config.cache.scope = :box
+
+    # OPTIONAL: If you are using VirtualBox, you might want to use that to enable
+    # NFS for shared folders. This is also very useful for vagrant-libvirt if you
+    # want bi-directional sync
+    # config.cache.synced_folder_opts = {
+    #   type: :nfs,
+    #   # The nolock option can be useful for an NFSv3 client that wants to avoid the
+    #   # NLM sideband protocol. Without this option, apt-get might hang if it tries
+    #   # to lock files needed for /var/cache/* operations. All of this can be avoided
+    #   # by using NFSv4 everywhere. Please note that the tcp option is not the default.
+    #   mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
+    # }
+  end
+  
   config.vm.define :chef_server_centos66 do |chef_server|
+
+
     chef_server.vm.box = "chef/centos-6.6"
     chef_server.vm.network "private_network", ip: "192.168.0.10"
     chef_server.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
     chef_server.vm.network "forwarded_port", guest: 443, host: 8443, auto_correct: true
     chef_server.vm.hostname = "chefserver"
+    chef_server.vm.synced_folder ".chef/", "/mnt/dot_chef"
 
     chef_server.vm.provision :chef_solo do |chef|
 
@@ -37,6 +94,21 @@ Vagrant.configure(2) do |config|
       chef.run_list = chef_server_json.delete('run_list')
       chef.json = chef_server_json
     end
+
+    # user_and_org
+    chef_server.vm.provision "shell", inline: $user_and_org 
+
+    # management console
+    chef_server.vm.provision "shell", inline: $management_console 
+
+    # push jobs
+    chef_server.vm.provision "shell", inline: $push_jobs 
+
+    # replication
+    chef_server.vm.provision "shell", inline: $replication 
+
+    # chef reporting
+    chef_server.vm.provision "shell", inline: $reporting 
   end
 
   # first client
