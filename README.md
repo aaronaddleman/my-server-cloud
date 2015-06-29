@@ -2,6 +2,13 @@
 
 The purpose of this project is to have a playground for various setups.
 
+## Installation
+
+1. clone
+1. bundle install
+1. vagrant plugin install chef
+1. berks vendor cookbooks
+
 ## Current state
 
 Chef Server = latest
