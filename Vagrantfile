@@ -13,8 +13,11 @@ chef_server_json = JSON.parse(Pathname(__FILE__).dirname.join('nodes', 'chef-ser
 
 # script to create organizations and user accounts
 $user_and_org = <<SCRIPT
-chef-server-ctl user-create aaddleman Aaron Addleman aaronaddleman@gmail.com changeme --filename /tmp/aaron.pem
-chef-server-ctl org-create short_name ninthport --association_user aaddleman --filename FILE_NAME
+chef-server-ctl user-create aaddleman Aaron Addleman aaronaddleman@gmail.com changeme --filename /mnt/dot_chef/aaddleman.pem
+chef-server-ctl org-create ninthport ninthport --association_user aaddleman --filename /mnt/dot_chef/ninthport.pem
+chef-server-ctl org-create fullaccess fullaccess --association_user aaddleman --filename /mnt/dot_chef/fullaccess.pem
+chef-server-ctl org-create trustedorg trustedorg --association_user aaddleman --filename /mnt/dot_chef/trustedorg.pem
+chef-server-ctl org-create untrustedorg untrustedorg --association_user aaddleman --filename /mnt/dot_chef/untrustedorg.pem
 SCRIPT
 
 # management console
@@ -45,6 +48,8 @@ opscode-reporting-ctl reconfigure
 chef-server-ctl reconfigure
 SCRIPT
 
+# install chef gem
+# TODO
 
 
 Vagrant.configure(2) do |config|
@@ -71,7 +76,7 @@ Vagrant.configure(2) do |config|
     #   mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
     # }
   end
-  
+
   config.vm.define :chef_server_centos66 do |chef_server|
 
 
