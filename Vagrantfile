@@ -33,23 +33,23 @@ Vagrant.configure(2) do |config|
       chef.roles_path = Chef::Config[:role_path]
       chef.data_bags_path = Chef::Config[:data_bag_path]
       chef.environments_path = Chef::Config[:environment_path]
-      # chef.node_name = 'chef-server.example.com' 
+      # chef.node_name = 'chef-server.example.com'
       chef.run_list = chef_server_json.delete('run_list')
-      chef.json = chef_server_json 
+      chef.json = chef_server_json
     end
   end
 
   # first client
   config.vm.define :chef_first_client do |chef_client|
     chef_client.vm.box = "chef/centos-6.6"
-    chef_client.vm.network "private_network", ip: "10.33.33.34" 
+    chef_client.vm.network "private_network", ip: "10.33.33.34"
 
-    chef_client.vm.provision :chef_client do |chef| 
-      chef.chef_server_url = Chef::Config[:chef_server_url] 
-      chef.validation_key_path = Chef::Config[:validation_key] 
-      chef.validation_client_name = Chef::Config[:validation_client_name] 
-      chef.node_name = 'first.example.com' 
-      chef.delete_node = true 
+    chef_client.vm.provision :chef_client do |chef|
+      chef.chef_server_url = Chef::Config[:chef_server_url]
+      chef.validation_key_path = Chef::Config[:validation_key]
+      chef.validation_client_name = Chef::Config[:validation_client_name]
+      chef.node_name = 'first.example.com'
+      chef.delete_node = true
       chef.delete_client = true
     end
   end
@@ -57,14 +57,14 @@ Vagrant.configure(2) do |config|
   # second client
   config.vm.define :chef_second_client do |chef_client|
     chef_client.vm.box = "chef/centos-6.6"
-    chef_client.vm.network "private_network", ip: "10.33.33.35" 
+    chef_client.vm.network "private_network", ip: "10.33.33.35"
 
-    chef_client.vm.provision :chef_client do |chef| 
-      chef.chef_server_url = Chef::Config[:chef_server_url] 
-      chef.validation_key_path = Chef::Config[:validation_key] 
-      chef.validation_client_name = Chef::Config[:validation_client_name] 
-      chef.node_name = 'second.example.com' 
-      chef.delete_node = true 
+    chef_client.vm.provision :chef_client do |chef|
+      chef.chef_server_url = Chef::Config[:chef_server_url]
+      chef.validation_key_path = Chef::Config[:validation_key]
+      chef.validation_client_name = Chef::Config[:validation_client_name]
+      chef.node_name = 'second.example.com'
+      chef.delete_node = true
       chef.delete_client = true
     end
   end
@@ -76,15 +76,31 @@ Vagrant.configure(2) do |config|
     chef_client.vm.network "private_network", ip: "10.33.33.40"
     chef_client.vm.network "private_network", ip: "10.33.33.41"
     chef_client.vm.network "private_network", ip: "10.33.30.10"
-    chef_client.vm.network "private_network", ip: "10.33.30.11" 
+    chef_client.vm.network "private_network", ip: "10.33.30.11"
 
-    chef_client.vm.provision :chef_client do |chef| 
-      chef.chef_server_url = Chef::Config[:chef_server_url] 
-      chef.validation_key_path = Chef::Config[:validation_key] 
-      chef.validation_client_name = Chef::Config[:validation_client_name] 
+    chef_client.vm.provision :chef_client do |chef|
+      chef.chef_server_url = Chef::Config[:chef_server_url]
+      chef.validation_key_path = Chef::Config[:validation_key]
+      chef.validation_client_name = Chef::Config[:validation_client_name]
       #chef.node_name = 'router.example.com'
       chef.add_role("router")
-      chef.delete_node = true 
+      chef.delete_node = true
+      chef.delete_client = true
+    end
+  end
+
+  # router client
+  config.vm.define :chef_host1_client do |chef_client|
+    chef_client.vm.hostname = "host1.example.com"
+    chef_client.vm.box = "chef/centos-6.6"
+    chef_client.vm.network "private_network", ip: "10.33.30.20"
+
+    chef_client.vm.provision :chef_client do |chef|
+      chef.chef_server_url = Chef::Config[:chef_server_url]
+      chef.validation_key_path = Chef::Config[:validation_key]
+      chef.validation_client_name = Chef::Config[:validation_client_name]
+      chef.add_role("nginx")
+      chef.delete_node = true
       chef.delete_client = true
     end
   end

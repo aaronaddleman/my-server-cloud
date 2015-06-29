@@ -1,13 +1,12 @@
-{ 
+{
   "name": "first.example.com",
-  "json_class": "Chef::Node",
-  "chef_type": "node",
-  "normal": { 
-    "fqdn": "10.33.33.34" 
-  }, 
-  "default": {},
-  "override": {},
+  "chef_environment": "_default",
   "run_list": [
-    "role[mongodb]" 
-  ] 
+    "role[mongodb]"
+  ],
+  "normal": {
+    "tags": [
+
+    ]
+  }
 }
