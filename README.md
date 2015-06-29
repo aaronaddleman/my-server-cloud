@@ -4,10 +4,10 @@ The purpose of this project is to have a playground for various setups.
 
 ## Installation
 
-clone
-bundle install
-vagrant plugin install chef
-berks vendor cookbooks
+1. clone
+1. bundle install
+1. vagrant plugin install chef
+1. berks vendor cookbooks
 
 ## Current state
 
