@@ -1,0 +1,13 @@
+{ 
+  "name": "router.example.com",
+  "json_class": "Chef::Node",
+  "chef_type": "node",
+  "normal": { 
+    "fqdn": "10.33.33.40"
+  }, 
+  "default": {},
+  "override": {},
+  "run_list": [
+    "role[router]" 
+  ] 
+}

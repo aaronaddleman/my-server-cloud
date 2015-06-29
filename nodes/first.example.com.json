@@ -1,0 +1,12 @@
+{
+  "name": "first.example.com",
+  "chef_environment": "_default",
+  "run_list": [
+    "role[mongodb]"
+  ],
+  "normal": {
+    "tags": [
+
+    ]
+  }
+}
