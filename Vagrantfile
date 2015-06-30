@@ -13,11 +13,12 @@ chef_server_json = JSON.parse(Pathname(__FILE__).dirname.join('nodes', 'chef-ser
 
 # script to create organizations and user accounts
 $user_and_org = <<SCRIPT
+chef-server-ctl user-list | grep aaddleman | wc -l && \
 chef-server-ctl user-create aaddleman Aaron Addleman aaronaddleman@gmail.com changeme --filename /mnt/dot_chef/aaddleman.pem
-chef-server-ctl org-create ninthport ninthport --association_user aaddleman --filename /mnt/dot_chef/ninthport.pem
-chef-server-ctl org-create fullaccess fullaccess --association_user aaddleman --filename /mnt/dot_chef/fullaccess.pem
-chef-server-ctl org-create trustedorg trustedorg --association_user aaddleman --filename /mnt/dot_chef/trustedorg.pem
-chef-server-ctl org-create untrustedorg untrustedorg --association_user aaddleman --filename /mnt/dot_chef/untrustedorg.pem
+chef-server-ctl org-create ninthport ninthport --association_user aaddleman --filename /mnt/dot_chef/ninthport-validator.pem
+chef-server-ctl org-create fullaccess fullaccess --association_user aaddleman --filename /mnt/dot_chef/fullaccess-validator.pem
+chef-server-ctl org-create trustedorg trustedorg --association_user aaddleman --filename /mnt/dot_chef/trustedorg-validator.pem
+chef-server-ctl org-create untrustedorg untrustedorg --association_user aaddleman --filename /mnt/dot_chef/untrustedorg-validator.pem
 SCRIPT
 
 # management console
@@ -59,11 +60,12 @@ Vagrant.configure(2) do |config|
     v.cpus = 1
   end
 
+
   if Vagrant.has_plugin?("vagrant-cachier")
     # Configure cached packages to be shared between instances of the same base box.
     # More info on the "Usage" link above
     config.cache.scope = :box
-
+    config.cache.auto_detect
     # OPTIONAL: If you are using VirtualBox, you might want to use that to enable
     # NFS for shared folders. This is also very useful for vagrant-libvirt if you
     # want bi-directional sync
@@ -77,9 +79,8 @@ Vagrant.configure(2) do |config|
     # }
   end
 
+  # chef server
   config.vm.define :chef_server_centos66 do |chef_server|
-
-
     chef_server.vm.box = "chef/centos-6.6"
     chef_server.vm.network "private_network", ip: "192.168.0.10"
     chef_server.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
@@ -107,21 +108,41 @@ Vagrant.configure(2) do |config|
     chef_server.vm.provision "shell", inline: $management_console 
 
     # push jobs
-    chef_server.vm.provision "shell", inline: $push_jobs 
+    #chef_server.vm.provision "shell", inline: $push_jobs 
 
     # replication
-    chef_server.vm.provision "shell", inline: $replication 
+    #chef_server.vm.provision "shell", inline: $replication 
 
     # chef reporting
-    chef_server.vm.provision "shell", inline: $reporting 
+    #chef_server.vm.provision "shell", inline: $reporting 
   end
 
+  # dev station
+  config.vm.define :chef_dev do |chef_client|
+    chef_client.vm.hostname = "dev.example.com"
+    chef_client.vm.box = "chef/centos-6.6"
+    chef_client.vm.network "private_network", ip: "192.168.0.20"
+
+    chef_client.vm.provision :chef_client do |chef|
+      chef.log_level = "debug"
+      chef.chef_server_url = Chef::Config[:chef_server_url]
+      chef.validation_key_path = Chef::Config[:validation_key]
+      chef.validation_client_name = Chef::Config[:validation_client_name]
+      chef.add_role("dev")
+      chef.delete_node = true
+      chef.delete_client = true
+    end
+  end
+
+
   # first client
+
   config.vm.define :chef_first_client do |chef_client|
     chef_client.vm.box = "chef/centos-6.6"
     chef_client.vm.network "private_network", ip: "192.168.0.21"
 
     chef_client.vm.provision :chef_client do |chef|
+      chef.log_level = "debug"
       chef.chef_server_url = Chef::Config[:chef_server_url]
       chef.validation_key_path = Chef::Config[:validation_key]
       chef.validation_client_name = Chef::Config[:validation_client_name]
@@ -129,6 +150,7 @@ Vagrant.configure(2) do |config|
       chef.delete_node = true
       chef.delete_client = true
     end
+
   end
 
   # second client

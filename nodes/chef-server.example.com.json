@@ -1,8 +1,8 @@
 {
-  "fqdn": "10.33.33.33",
+  "fqdn": "192.168.0.10",
   "chef-server": {
     // "version": "12.1.0",
-    "api_fqdn": "10.33.33.33",
+    "api_fqdn": "192.168.0.10",
     "configuration": {
       "notification_email": "aaronaddleman@gmail.com"
     }

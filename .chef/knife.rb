@@ -22,9 +22,9 @@ log_level                :info
 log_location             STDOUT
 node_name                "aaddleman"
 client_key               "#{current_dir}/aaddleman.pem"
-validation_client_name   "aaroninc-validator"
-validation_key           "#{current_dir}/aaroninc-validator.pem"
-chef_server_url          "https://192.168.0.10/organizations/aaroninc"
+validation_client_name   "aaddleman"
+validation_key           "#{current_dir}/fullaccess-validator.pem"
+chef_server_url          "https://192.168.0.10/organizations/fullaccess"
 syntax_check_cache_path  "#{ENV['HOME']}/.chef/syntaxcache"
 cookbook_path            ["#{current_dir}/../cookbooks"]
 ssl_verify_mode          :verify_none
