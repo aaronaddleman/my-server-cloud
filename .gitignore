@@ -4,3 +4,4 @@
 /.vagrant/
 /.chef/trusted_certs/
 .kitchen.local.yml
+.chef/*.pem
