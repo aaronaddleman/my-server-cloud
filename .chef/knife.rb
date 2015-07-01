@@ -22,7 +22,7 @@ log_level                :info
 log_location             STDOUT
 node_name                "aaddleman"
 client_key               "#{current_dir}/aaddleman.pem"
-validation_client_name   "aaddleman"
+validation_client_name   "fullaccess-validator"
 validation_key           "#{current_dir}/fullaccess-validator.pem"
 chef_server_url          "https://192.168.0.10/organizations/fullaccess"
 syntax_check_cache_path  "#{ENV['HOME']}/.chef/syntaxcache"
