@@ -1,0 +1,4 @@
+Cookbooks are stored here.
+To populate this dir with cookbooks from you berkshelf:
+
+berks vendor cookbooks
