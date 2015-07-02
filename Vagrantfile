@@ -172,10 +172,10 @@ Vagrant.configure(2) do |config|
   config.vm.define :chef_router_client do |chef_client|
     chef_client.vm.hostname = "router.example.com"
     chef_client.vm.box = "chef/centos-6.6"
-    chef_client.vm.network "private_network", ip: "192.168.0.1"
     chef_client.vm.network "private_network", ip: "192.168.0.2"
     chef_client.vm.network "private_network", ip: "192.168.0.3"
-    chef_client.vm.network "private_network", ip: "192.168.0.4"
+    chef_client.vm.network "private_network", ip: "192.168.20.2"
+    chef_client.vm.network "private_network", ip: "192.168.20.3"
 
     chef_client.vm.provision :chef_client do |chef|
       chef.chef_server_url = Chef::Config[:chef_server_url]
@@ -192,7 +192,7 @@ Vagrant.configure(2) do |config|
   config.vm.define :chef_host1_client do |chef_client|
     chef_client.vm.hostname = "host1.example.com"
     chef_client.vm.box = "chef/centos-6.6"
-    chef_client.vm.network "private_network", ip: "192.168.0.9"
+    chef_client.vm.network "private_network", ip: "192.168.20.20"
 
     chef_client.vm.provision :chef_client do |chef|
       chef.chef_server_url = Chef::Config[:chef_server_url]
