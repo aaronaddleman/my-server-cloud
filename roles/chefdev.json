@@ -1,0 +1,12 @@
+{
+  "name": "chefdev",
+  "description": "Chef development host with ChefDK and a clean environment",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "run_list": [
+    "recipe[base]",
+    "recipe[chefdev]"
+  ]
+}
