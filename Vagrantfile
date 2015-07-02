@@ -122,12 +122,12 @@ Vagrant.configure(2) do |config|
     chef_client.vm.hostname = "dev.example.com"
     chef_client.vm.box = "chef/centos-6.6"
     chef_client.vm.network "private_network", ip: "192.168.0.20"
-    chef_server.vm.synced_folder ".chef/", "/mnt/.chef"
-    chef_server.vm.synced_folder "cookbooks/", "/mnt/cookbook"
-    chef_server.vm.synced_folder "data_bags/", "/mnt/data_bags"
-    chef_server.vm.synced_folder "environments/", "/mnt/environments"
-    chef_server.vm.synced_folder "nodes/", "/mnt/nodes"
-    chef_server.vm.synced_folder "roles/", "/mnt/roles"
+    chef_client.vm.synced_folder ".chef/", "/mnt/.chef"
+    chef_client.vm.synced_folder "cookbooks/", "/mnt/cookbook"
+    chef_client.vm.synced_folder "data_bags/", "/mnt/data_bags"
+    chef_client.vm.synced_folder "environments/", "/mnt/environments"
+    chef_client.vm.synced_folder "nodes/", "/mnt/nodes"
+    chef_client.vm.synced_folder "roles/", "/mnt/roles"
 
     chef_client.vm.provision :chef_client do |chef|
       chef.log_level = "debug"
