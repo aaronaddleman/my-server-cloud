@@ -5,6 +5,8 @@ require 'rubygems'
 require 'chef'
 require 'json'
 
+current_dir = File.dirname(__FILE__)
+
 # read in the knife.rb for setting options for provisioning to chef server and mapping dirs to hosting environment
 Chef::Config.from_file(File.join(File.dirname(__FILE__), '.chef', 'knife.rb'))
 
@@ -19,6 +21,7 @@ chef-server-ctl org-create ninthport ninthport --association_user aaddleman --fi
 chef-server-ctl org-create fullaccess fullaccess --association_user aaddleman --filename /mnt/dot_chef/fullaccess-validator.pem
 chef-server-ctl org-create trustedorg trustedorg --association_user aaddleman --filename /mnt/dot_chef/trustedorg-validator.pem
 chef-server-ctl org-create untrustedorg untrustedorg --association_user aaddleman --filename /mnt/dot_chef/untrustedorg-validator.pem
+chef-server-ctl org-create openstack openstack --association_user aaddleman --filename /mnt/dot_chef/openstack-validator.pem
 SCRIPT
 
 # management console
@@ -52,12 +55,17 @@ SCRIPT
 # install chef gem
 # TODO
 
+# create openstack encrypted-secret
+$openstack_secret = <<SCRIPT
+mkdir -p /etc/chef
+cp /mnt/dot_chef/encrypted_data_bag_secret /etc/chef/openstack_data_bag_secret
+SCRIPT
 
 Vagrant.configure(2) do |config|
 
   config.vm.provider "virtualbox" do |v|
-    v.memory = 1024
-    v.cpus = 1
+    v.memory = 4096
+    v.cpus = 4
   end
 
 
@@ -210,5 +218,31 @@ Vagrant.configure(2) do |config|
     end
   end
 
+
+  # openstack all in one
+  config.vm.define :openstack_aio do |chef_client|
+    chef_client.vm.hostname = "openstack.example.com"
+    chef_client.vm.box = "chef/centos-7.0"
+    chef_client.vm.network "public_network", ip: "192.168.20.20"
+    chef_client.vm.network "public_network", ip: "192.168.200.2"
+    chef_client.vm.network "public_network", ip: "192.168.300.2"
+
+    chef_client.vm.synced_folder ".chef/", "/mnt/openstack_dot_chef"
+
+    chef_client.vm.provision "shell", inline: $openstack_secret
+
+    chef_client.vm.provision :chef_client do |chef|
+      chef.chef_server_url = "https://192.168.0.10/organizations/openstack"
+      chef.validation_key_path = "#{current_dir}/.chef/openstack-validator.pem"
+      chef.validation_client_name = "openstack-validator"
+     
+      chef.add_role("allinone-compute")
+      chef.add_role("os-image-upload")
+      #chef.add_recipe "openstack-hacks::default"
+      chef.add_recipe "openstack-integration-test::setup"
+      chef.delete_node = true
+      chef.delete_client = true
+    end
+  end
 
 end
