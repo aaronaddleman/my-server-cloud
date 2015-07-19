@@ -1,0 +1,3 @@
+[submodule "cookbooks/attributes"]
+	path = cookbooks/attributes
+	url = git@github.com:aaronaddleman-cookbooks/attributes.git
