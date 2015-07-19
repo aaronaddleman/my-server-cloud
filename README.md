@@ -31,3 +31,8 @@ When making changes to a role, you can update the chef server with the command:
 knife role from file roles/router.json
 ```
 
+## Getting cookbook updates
+
+1. after cloaning repo
+1. git submodule init
+1. git submodule update
