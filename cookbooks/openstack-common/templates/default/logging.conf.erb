@@ -1,0 +1,38 @@
+[loggers]
+keys=<%= (node["openstack"]["logging"]['loggers'].keys).join(',') %>
+
+[formatters]
+keys=<%= node["openstack"]["logging"]['formatters'].keys.join(',') %>
+
+[handlers]
+keys=<%= node["openstack"]["logging"]['handlers'].keys.join(',') %>
+
+## FORMATTERS ##
+
+<% node["openstack"]["logging"]['formatters'].each do |section, options| %>
+[formatter_<%= section %>]
+<% options.each do |key, value| %>
+<%= key %>=<%= value %>
+<% end %>
+
+<% end %>
+
+## LOGGERS ##
+
+<% node["openstack"]["logging"]['loggers'].each do |section, options| %>
+[logger_<%= section %>]
+<% options.each do |key, value| %>
+<%= key %>=<%= value %>
+<% end %>
+
+<% end %>
+
+## HANDLERS ##
+
+<% node["openstack"]["logging"]['handlers'].each do |section, options| %>
+[handler_<%= section %>]
+<% options.each do |key, value| %>
+<%= key %>=<%= value %>
+<% end %>
+
+<% end %>

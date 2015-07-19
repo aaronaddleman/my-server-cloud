@@ -1,0 +1,41 @@
+{
+  "name": "openstack-integration-test",
+  "description": "Installs and configures the Tempest Integration Test Suite",
+  "long_description": "Description\n===========\n\nThis cookbook installs the OpenStack Integration Test Suite **Tempest** as part of an OpenStack reference deployment Chef for OpenStack.\n\nRequirements\n============\n\nChef 11 or higher required (for Chef environment use).\n\nCookbooks\n---------\n\nThe following cookbooks are dependencies:\n\n* openstack-common\n* openstack-identity\n* openstack-image\n* openstack-compute\n* openstack-block-storage\n\nUsage\n=====\n\nsetup\n-----\n* Install and configure Tempest\n\nAttributes\n==========\n\nPlease refer to the [attributes/default.rb](attributes/default.rb) for attribute details.\n\nTesting\n=======\n\nPlease refer to the [TESTING.md](TESTING.md) for instructions for testing the cookbook.\n\nLicense and Author\n==================\n\n|                      |                                                    |\n|:---------------------|:---------------------------------------------------|\n| **Author**           |  Matt Thompson (<matt.thompson@rackspace.co.uk>)   |\n|                      |                                                    |\n| **Copyright**        |  Copyright (c) 2014, Rackspace US, Inc.            |\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+  "maintainer": "Rackspace US, Inc.",
+  "maintainer_email": "YOUR_EMAIL",
+  "license": "Apache 2.0",
+  "platforms": {
+    "ubuntu": ">= 0.0.0",
+    "fedora": ">= 0.0.0",
+    "redhat": ">= 0.0.0",
+    "centos": ">= 0.0.0"
+  },
+  "dependencies": {
+    "openstack-common": ">= 11.5.0",
+    "openstack-identity": ">= 11.0.0",
+    "openstack-image": ">= 11.0.0",
+    "openstack-compute": ">= 11.0.0",
+    "openstack-block-storage": ">= 11.0.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+    "openstack-integration-test::setup": "Installs and configures Tempest"
+  },
+  "version": "11.0.0",
+  "source_url": "",
+  "issues_url": ""
+}

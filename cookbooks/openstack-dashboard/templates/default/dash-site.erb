@@ -1,0 +1,96 @@
+<%= node["openstack"]["dashboard"]["custom_template_banner"] %>
+
+<% if node['apache']['version'] != '2.4' -%>
+NameVirtualHost <%= @http_bind_address %>:<%= @http_bind_port %>
+<% end -%>
+
+<VirtualHost <%= @http_bind_address %>:<%= @http_bind_port %>>
+<% if node["openstack"]["dashboard"]["server_hostname"] -%>
+  ServerName <%= node["openstack"]["dashboard"]["server_hostname"] %>
+<% end -%>
+<% if node["openstack"]["dashboard"]["use_ssl"] %>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  <% if @http_bind_port != 80 or @https_bind_port != 443 %>
+  RewriteRule ^(.*)$ https://%{SERVER_NAME}:<%= @https_bind_port %>%{REQUEST_URI} [L,R]
+  <% else -%>
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R]
+  <% end -%>
+  TraceEnable <%= node['openstack']['dashboard']['traceenable'] %>
+</VirtualHost>
+
+  <% if node['apache']['version'] != '2.4' -%>
+NameVirtualHost <%= @https_bind_address %>:<%= @https_bind_port %>
+  <% end -%>
+
+<VirtualHost <%= @https_bind_address %>:<%= @https_bind_port %>>
+  <% if node["openstack"]["dashboard"]["server_hostname"] -%>
+  ServerName <%= node["openstack"]["dashboard"]["server_hostname"] %>
+  <% end -%>
+<% end %>
+  ServerAdmin <%= node["apache"]["contact"] %>
+  WSGIScriptAlias <%= node["openstack"]["dashboard"]["webroot"] %> <%= node["openstack"]["dashboard"]["wsgi_path"] %>
+  WSGIDaemonProcess dashboard user=<%= node['openstack']['dashboard']['horizon_user'] %> group=<%= node['openstack']['dashboard']['horizon_group'] %> processes=3 threads=10 python-path=<%= node["openstack"]["dashboard"]["dash_path"] %>
+  WSGIProcessGroup dashboard
+
+  DocumentRoot <%= node["openstack"]["dashboard"]["dash_path"] %>/.blackhole/
+  Alias /static <%= node["openstack"]["dashboard"]["static_path"] %>
+
+  <Directory />
+    Options FollowSymLinks
+    AllowOverride None
+  </Directory>
+
+  <Directory <%= node["openstack"]["dashboard"]["dash_path"] %>>
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride None
+    <% if node['apache']['version'] == '2.4' -%>
+    Require all granted
+    <% else -%>
+    Order allow,deny
+    allow from all
+    <% end -%>
+  </Directory>
+
+  <Directory <%= node["openstack"]["dashboard"]["static_path"] %>>
+    Options FollowSymLinks MultiViews
+    AllowOverride None
+    <% if node['apache']['version'] == '2.4' -%>
+    Require all granted
+    <% else -%>
+    Order allow,deny
+    allow from all
+    <% end -%>
+  </Directory>
+
+  <% if node["openstack"]["dashboard"]["use_ssl"] -%>
+  SSLEngine on
+  SSLCertificateFile <%= @ssl_cert_file %>
+  SSLCertificateKeyFile <%= @ssl_key_file %>
+  SSLProtocol <%= node["openstack"]["dashboard"]["ssl"]["protocol"] %>
+    <% if node["openstack"]["dashboard"]["ssl"]["ciphers"] -%>
+  SSLCipherSuite <%= node["openstack"]["dashboard"]["ssl"]["ciphers"] %>
+    <% end -%>
+  <% end -%>
+
+  # Allow custom files to overlay the site (such as logo.png)
+  RewriteEngine On
+  RewriteCond /opt/dash/site_overlay%{REQUEST_FILENAME} -s
+  RewriteRule ^/(.+) /opt/dash/site_overlay/$1 [L]
+
+  ErrorLog <%= node["apache"]["log_dir"] %>/<%= node["openstack"]["dashboard"]["error_log"] %>
+  LogLevel warn
+  CustomLog <%= node["apache"]["log_dir"] %>/<%= node["openstack"]["dashboard"]["access_log"] %> combined
+  TraceEnable <%= node['openstack']['dashboard']['traceenable'] %>
+  <% unless node["openstack"]["dashboard"]["cache_html"] %>
+  <% if node['apache']['version'] >= '2.4' -%>
+  SetEnvIfExpr "req('accept') =~/html/" NO_CACHE
+  <% end -%>
+  Header merge Cache-Control no-cache env=NO_CACHE
+  Header merge Cache-Control no-store env=NO_CACHE
+  <% end -%>
+</VirtualHost>
+
+<% unless node["openstack"]["dashboard"]["wsgi_socket_prefix"].nil? %>
+WSGISocketPrefix <%= node["openstack"]["dashboard"]["wsgi_socket_prefix"] %>
+<% end %>

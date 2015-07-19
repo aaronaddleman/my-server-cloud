@@ -1,0 +1,40 @@
+{
+  "name": "openstack-ops-messaging",
+  "description": "Provides the shared messaging configuration for Chef for OpenStack.",
+  "long_description": "",
+  "maintainer": "openstack-chef",
+  "maintainer_email": "opscode-chef-openstack@googlegroups.com",
+  "license": "Apache 2.0",
+  "platforms": {
+    "fedora": ">= 0.0.0",
+    "ubuntu": ">= 0.0.0",
+    "redhat": ">= 0.0.0",
+    "centos": ">= 0.0.0",
+    "suse": ">= 0.0.0"
+  },
+  "dependencies": {
+    "openstack-common": ">= 11.0.0",
+    "rabbitmq": "~> 4.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+    "server": "Installs and configures server packages for messaging queue used by the deployment.",
+    "rabbitmq-server": "Installs and configures RabbitMQ and is called via the server recipe"
+  },
+  "version": "11.1.0",
+  "source_url": "",
+  "issues_url": ""
+}

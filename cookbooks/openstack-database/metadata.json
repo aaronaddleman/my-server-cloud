@@ -1,0 +1,38 @@
+{
+  "name": "openstack-database",
+  "description": "Installs/Configures trove",
+  "long_description": "Description\n===========\n\nInstalls the OpenStack Database service **Trove** as part of the\nOpenStack reference deployment Chef for OpenStack.  Trove is currently\ninstalled from packages.\n\nhttps://wiki.openstack.org/wiki/Trove\n\nRequirements\n============\n\nChef 11\n\nCookbooks\n---------\n\nThe following cookbooks are dependencies:\n\n* openstack-common\n* openstack-identity\n\n\nUsage\n=====\n\napi\n----\n- Installs the API service.\n\nconductor\n----\n- Installs conductor service.\n\ntaskmanager\n----\n- Installs the taskmanager service.\n\nidentity_registration\n----\n- Registers the endpoints with Keystone.\n\nAttributes\n==========\n\nTesting\n=====\n\nPlease refer to the [TESTING.md](TESTING.md) for instructions for testing the cookbook.\n\nLicense and Author\n==================\n\n|                      |                                                    |\n|:---------------------|:---------------------------------------------------|\n| **Author**           |  Ionut Artarisi (<iartarisi@suse.cz>)              |\n|                      |                                                    |\n| **Copyright**        |  Copyright (c) 2013-2014, SUSE Linux GmbH          |\n\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+  "maintainer": "openstack-chef",
+  "maintainer_email": "opscode-chef-openstack@googlegroups.com",
+  "license": "Apache 2.0",
+  "platforms": {
+    "suse": ">= 0.0.0"
+  },
+  "dependencies": {
+    "openstack-common": ">= 11.0.0",
+    "openstack-identity": ">= 11.0.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+    "openstack-database::identity_registration": "Registers Trove endpoints and service with Keystone",
+    "openstack-database::api": "Installs API service",
+    "openstack-database::conductor": "Installs Conductor service",
+    "openstack-database::taskmanager": "Installs TaskManager service"
+  },
+  "version": "11.0.0",
+  "source_url": "",
+  "issues_url": ""
+}

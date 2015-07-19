@@ -1,0 +1,37 @@
+{
+  "name": "openstack_client",
+  "description": "Library cookbook to interact with Openstack Clouds",
+  "long_description": "Openstack Cookbook\n==================\n\nThis is a library cookbook to consume openstack cloud resources.\n\nRequirements\n------------\n\n- TBD\n\nAttributes\n----------\n\nAttributes are self documented in `attributes/*.rb`\n\nUsage\n-----\n#### openstack::default\n\nInstalls [fog](http://fog.io) gem and enabled LWRPs\n\n```json\n{\n  \"name\":\"my_node\",\n  \"run_list\": [\n    \"recipe[openstack]\"\n  ]\n}\n```\n\n#### openstack::_example_swift\n\nExample usage of swift LWRPs\n\n```json\n{\n  \"name\":\"my_node\",\n  \"run_list\": [\n    \"recipe[openstack]\",\n    \"recipe[openstack::_example_swift]\",\n  ]\n}\n```\n\nIf you need a simple swift endpoint to test against, the following blog post will help you set up a [single node swift on rackspace cloud](http://blog.phymata.com/2013/02/18/swift-only-with-openstack-devstack-on-the-rackspace-cloud/).\n\nContributing\n------------\n\nPlease use the typical Contrubution rules we have set up [here](https://wiki.openstack.org/wiki/Chef/GettingStarted#Contributing_to_the_OpenStack_Chef_Cookbooks),\nif you have any questions about this book please go to `irc.freenode.net:#openstack-chef` or contact the [mailing-list](http://groups.google.com/group/opscode-chef-openstack).\n\nLicense and Authors\n-------------------\n\nApache 2\n\nPaul Czarkowski,  username.taken@gmail.com\n",
+  "maintainer": "openstack-chef",
+  "maintainer_email": "opscode-chef-openstack@googlegroups.com",
+  "license": "Apache2",
+  "platforms": {
+    "ubuntu": ">= 14.4.0",
+    "centos": ">= 6.5.0"
+  },
+  "dependencies": {
+    "apt": "~> 2.6.1",
+    "build-essential": "~> 2.1.3",
+    "xml": "~> 1.2.13",
+    "yum": "~> 3.5.4"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "11.0.0",
+  "source_url": "",
+  "issues_url": ""
+}

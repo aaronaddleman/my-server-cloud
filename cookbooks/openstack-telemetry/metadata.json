@@ -1,0 +1,46 @@
+{
+  "name": "openstack-telemetry",
+  "description": "The OpenStack Metering service Ceilometer.",
+  "long_description": "Description\n===========\n\nInstalls the OpenStack Metering service **Ceilometer** as part of the OpenStack\nreference deployment Chef for OpenStack.  Ceilometer is currently installed\nfrom packages.\n\nhttps://wiki.openstack.org/wiki/Ceilometer\n\nRequirements\n============\n\nCookbooks\n---------\n\nThe following cookbooks are dependencies:\n\n* openstack-common\n* openstack-identity\n* openstack-compute\n\nUsage\n=====\n\nagent-central\n----\n- Installs agent central service.\n\nagent-compute\n----\n- Installs agent compute service.\n\nagent-notification\n----\n- Installs agent notification service.\n\nalarm-evaluator\n----\n- Installs alarm evaluator service.\n\nalarm-notifier\n----\n- Installs alarm notifier service.\n\napi\n----\n- Installs API service.\n\nclient\n----\n- Install the client packages\n\ncollector\n----\n- Installs collector package and service. If the NoSQL database is used for metering service, ceilometer-dbsync will not be executed.\n\ncommon\n----\n- Common metering configuration.\n\nidentity_registration\n----\n- Registers the endpoints, tenant and user for metering service with Keystone.\n\nAttributes\n==========\n\n* `openstack['telemetry']['api']['auth']['version']` - Select v2.0 or v3.0. Default v2.0. The auth API version used to interact with identity service.\n* `openstack['telemetry']['sample_source']` -  The source name of emitted samples, default value is openstack.\n* `openstack['telemetry']['api']['auth']['memcached_servers']` - A list of memcached server(s) to use for caching\n* `openstack['telemetry']['api']['auth']['memcache_security_strategy']` - Whether token data should be authenticated or authenticated and encrypted. Acceptable values are MAC or ENCRYPT\n* `openstack['telemetry']['api']['auth']['memcache_secret_key']` - This string is used for key derivation\n* `openstack['telemetry']['api']['auth']['hash_algorithms']` - Hash algorithms to use for hashing PKI tokens\n* `openstack['telemetry']['api']['auth']['cafile']` - A PEM encoded Certificate Authority to use when verifying HTTPs connections\n* `openstack['telemetry']['api']['auth']['insecure']` - Set whether to verify HTTPS connections\n* `openstack['telemetry']['service-credentials']['cafile']` - A PEM encoded Certificate Authority to use when verifying HTTPs connections (for service polling authentication)\n* `openstack['telemetry']['service-credentials']['insecure']` - Set whether to verify HTTPS connections (for service polling authentication)\n* `openstack['telemetry']['dbsync_timeout']` - Set dbsync command timeout value\n* `openstack['telemetry']['database']['time_to_live']` - Set a time_to_live parameter (ttl) for samples. Set -1 for no expiry\n* `openstack['telemetry']['notification']['store_events']` - Set a store_events parameter for notification service\n\nThe following attributes are defined in attributes/default.rb of the common cookbook, but are documented here due to their relevance:\n\n* `openstack['endpoints']['telemetry-api-bind']['host']` - The IP address to bind the api service to\n* `openstack['endpoints']['telemetry-api-bind']['port']` - The port to bind the api service to\n* `openstack['endpoints']['telemetry-api-bind']['bind_interface']` - The interface name to bind the api service to\n\nIf the value of the 'bind_interface' attribute is non-nil, then the telemetry service will be bound to the first IP address on that interface.  If the value of the 'bind_interface' attribute is nil, then the telemetry service will be bound to the IP address specifie\n\nTesting\n=====\n\nPlease refer to the [TESTING.md](TESTING.md) for instructions for testing the cookbook.\n\nBerkshelf\n=====\n\nBerks will resolve version requirements and dependencies on first run and\nstore these in Berksfile.lock. If new cookbooks become available you can run\n`berks update` to update the references in Berksfile.lock. Berksfile.lock will\nbe included in stable branches to provide a known good set of dependencies.\nBerksfile.lock will not be included in development branches to encourage\ndevelopment against the latest cookbooks.\n\nLicense and Author\n==================\n\n|                      |                                                    |\n|:---------------------|:---------------------------------------------------|\n| **Author**           |  Matt Ray (<matt@opscode.com>)                     |\n| **Author**           |  John Dewey (<jdewey@att.com>)                     |\n| **Author**           |  Justin Shepherd (<jshepher@rackspace.com>)        |\n| **Author**           |  Salman Baset (<sabaset@us.ibm.com>)               |\n| **Author**           |  Ionut Artarisi (<iartarisi@suse.cz>)              |\n| **Author**           |  Eric Zhou (<zyouzhou@cn.ibm.com>)                 |\n| **Author**           |  Chen Zhiwei (<zhiwchen@cn.ibm.com>)               |\n| **Author**           |  David Geng (<gengjh@cn.ibm.com>)                  |\n| **Author**           |  Mark Vanderwiel (<vanderwl@us.ibm.com>)           |\n| **Author**           |  Jan Klare (<j.klare@x-ion.de>)                    |\n|                      |                                                    |\n| **Copyright**        |  Copyright (c) 2013, Opscode, Inc.                 |\n| **Copyright**        |  Copyright (c) 2013, AT&T Services, Inc.           |\n| **Copyright**        |  Copyright (c) 2013, Rackspace US, Inc.            |\n| **Copyright**        |  Copyright (c) 2013-2014, IBM, Corp.               |\n| **Copyright**        |  Copyright (c) 2013-2014, SUSE Linux GmbH          |\n\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+  "maintainer": "openstack-chef",
+  "maintainer_email": "opscode-chef-openstack@googlegroups.com",
+  "license": "Apache 2.0",
+  "platforms": {
+    "ubuntu": ">= 0.0.0",
+    "suse": ">= 0.0.0"
+  },
+  "dependencies": {
+    "openstack-common": ">= 11.5.0",
+    "openstack-identity": ">= 11.0.0",
+    "openstack-compute": ">= 11.0.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+    "openstack-telemetry::agent-central": "Installs agent central service.",
+    "openstack-telemetry::agent-compute": "Installs agent compute service.",
+    "openstack-telemetry::agent-notification": "Installs the agent notification service.",
+    "openstack-telemetry::api": "Installs API service.",
+    "openstack-telemetry::client": "Installs client.",
+    "openstack-telemetry::collector": "Installs collector service. If the NoSQL database is used for metering service, ceilometer-dbsync will not be executed.",
+    "openstack-telemetry::alarm-evaluator": "Installs the alarm evaluator service.",
+    "openstack-telemetry::alarm-notifier": "Installs the alarm notifier service.",
+    "openstack-telemetry::common": "Common metering configuration.",
+    "openstack-telemetry::identity_registration": "Registers the endpoints, tenant and user for metering service with Keystone"
+  },
+  "version": "11.0.0",
+  "source_url": "",
+  "issues_url": ""
+}

@@ -1,0 +1,36 @@
+{
+  "name": "statsd",
+  "description": "Installs/Configures statsd",
+  "long_description": "Description\n===========\n\nInstalls and sets up statsd <http://github.com/etsy/statsd>\n\nRequirements\n============\n\nUbuntu 12.04\n\nAttributes\n==========\n\n* `node['statsd']['port']` - The port for Statsd to listen for stats on. Defaults to 8125\n* `node['statsd']['graphite_host']` - The host to forward processed statistics to. Defaults to localhost.\n* `node['statsd']['graphite_port']` - The port to forward processed statistics to. Defaults to 2003\n* `node['statsd']['package_version']` - The version to use when creating the package. Defaults to 0.6.0\n* `node['statsd']['tmp_dir']` - The temporary directory to while building the package. Defaults to /tmp\n* `node['statsd']['repo']` - The gitrepo to use. Defaults to \"git://github.com/etsy/statsd.git\"\n* `node['statsd']['sha']`  - The sha checksum of the repo to use\n\nUsage\n=====\n\nIncluding this recipe will build a dpkg from the statsd git repository and install it.\n\nBy default statsd will attempt to send statistics to a graphite instance running on localhost.\n\nTesting\n=======\n\nSee SilverLining documentation\n\nLicense and Author\n==================\n\nAuthor:: Scott Lampert (<sl724q@att.com>)\n\nCopyright 2012-2014, AT&T Services, Inc.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+  "maintainer": "AT&T Services, Inc.",
+  "maintainer_email": "cookbooks@lists.tfoundry.com",
+  "license": "Apache 2.0",
+  "platforms": {
+    "ubuntu": ">= 0.0.0"
+  },
+  "dependencies": {
+    "build-essential": ">= 0.0.0",
+    "git": ">= 0.0.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+    "statsd": "Installs stats ruby gem",
+    "statsd::server": "Configures statsd server"
+  },
+  "version": "0.1.6",
+  "source_url": "",
+  "issues_url": ""
+}
