@@ -8,7 +8,7 @@ validation_key           "#{current_dir}/fullaccess-validator.pem"
 chef_server_url          "https://192.168.0.10/organizations/fullaccess"
 syntax_check_cache_path  "#{ENV['HOME']}/.chef/syntaxcache"
 ssl_verify_mode          :verify_none
-cookbook_path            "#{current_dir}/../cookbooks")
+cookbook_path            "#{current_dir}/../cookbooks"
 node_path                 "#{current_dir}/../nodes" 
 role_path                 "#{current_dir}/../roles"
 data_bag_path             "#{current_dir}/../data_bags"
