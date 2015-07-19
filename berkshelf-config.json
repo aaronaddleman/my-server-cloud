@@ -1,0 +1,12 @@
+{
+  "chef": {
+    "chef_server_url": "https://chefserver/organizations/fullaccess",
+    "validation_client_name": "fullaccess-validator",
+    "validation_key_path": "/Users/aaddleman/Documents/training/chef/cooking-infrastructure/my-server-cloud/.chef/fullaccess-validator.pem",
+    "client_key": "/Users/aaddleman/Documents/training/chef/cooking-infrastructure/my-server-cloud/.chef/aaddleman.pem",
+    "node_name": "aaddleman"
+  },
+  "ssl": {
+    "verify": false
+  }
+}
