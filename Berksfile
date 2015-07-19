@@ -5,3 +5,4 @@ cookbook 'chef-server'
 cookbook 'nginx'
 cookbook 'yum'
 cookbook 'sysctl', '~> 0.6.2'
+cookbook 'attributes', path: "cookbooks/attributes"
