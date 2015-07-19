@@ -222,10 +222,19 @@ Vagrant.configure(2) do |config|
   # openstack all in one
   config.vm.define :openstack_aio do |chef_client|
     chef_client.vm.hostname = "openstack.example.com"
-    chef_client.vm.box = "chef/centos-7.0"
+    chef_client.vm.box = "ubuntu14"
+    chef_client.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
+
     chef_client.vm.network "public_network", ip: "192.168.20.20"
     chef_client.vm.network "public_network", ip: "192.168.200.2"
     chef_client.vm.network "public_network", ip: "192.168.300.2"
+
+    chef_client.vm.network "forwarded_port", guest: 443, host: 9443
+    chef_client.vm.network "forwarded_port", guest: 4002, host: 4002
+    chef_client.vm.network "forwarded_port", guest: 5000, host: 5000
+    chef_client.vm.network "forwarded_port", guest: 8773, host: 8773
+    chef_client.vm.network "forwarded_port", guest: 8774, host: 8774
+    chef_client.vm.network "forwarded_port", guest: 35357, host: 35357
 
     chef_client.vm.synced_folder ".chef/", "/mnt/openstack_dot_chef"
 
