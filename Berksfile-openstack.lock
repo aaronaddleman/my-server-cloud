@@ -1,0 +1,234 @@
+DEPENDENCIES
+  apache2 (= 3.1.0)
+  apt (= 2.6.1)
+  aws (= 2.1.1)
+  build-essential (= 2.1.3)
+  ceph (= 0.8.0)
+  database (= 4.0.2)
+  erlang (= 1.5.8)
+  memcached (= 1.7.2)
+  mysql (= 6.0.13)
+  mysql2_chef_gem (= 1.0.1)
+  openssl (= 4.0.0)
+  openstack-bare-metal
+    git: git://github.com/openstack/cookbook-openstack-bare-metal.git
+    revision: 861fff49a7916a5500bf4c9b7b72d49e22bda385
+  openstack-block-storage
+    git: git://github.com/openstack/cookbook-openstack-block-storage.git
+    revision: 5140ba531dcb0368b141813aa6cc88ead5de6387
+  openstack-common
+    git: git://github.com/openstack/cookbook-openstack-common.git
+    revision: e7b8676b0d2240b7cdec879d81e01fed19a354b8
+  openstack-compute
+    git: git://github.com/openstack/cookbook-openstack-compute.git
+    revision: 8bd3223e6024131bc09e0773202d7ac9636d1333
+  openstack-dashboard
+    git: git://github.com/openstack/cookbook-openstack-dashboard.git
+    revision: 8e7ac18b0666aab92440fbaf8f7ab927707b4074
+  openstack-data-processing
+    git: git://github.com/openstack/cookbook-openstack-data-processing.git
+    revision: 4843fa17b842d003cb811e41d7a1763cf4e72191
+  openstack-database
+    git: git://github.com/openstack/cookbook-openstack-database.git
+    revision: 58086198f81e67b3f35849589d2aa5d54891fef2
+  openstack-hacks
+    path: cookbooks/openstack-hacks-cookbook
+  openstack-identity
+    git: git://github.com/openstack/cookbook-openstack-identity.git
+    revision: b4d2d310e71d071ccc42d0f8431e3ce953e28b76
+  openstack-image
+    git: git://github.com/openstack/cookbook-openstack-image.git
+    revision: abc47a3bb55ea63d2136d5b2c391529a84ac0df0
+  openstack-integration-test
+    git: git://github.com/openstack/cookbook-openstack-integration-test.git
+    revision: fece8b5af288036ef1cb672b434689eb430df0fd
+  openstack-network
+    git: git://github.com/openstack/cookbook-openstack-network.git
+    revision: b49df0cb25866c66bea2b868266b32684a4876c9
+  openstack-object-storage
+    git: git://github.com/openstack/cookbook-openstack-object-storage.git
+    revision: 7de9297043fc17bcdf8f0bbef41e82819615935c
+  openstack-ops-database
+    git: git://github.com/openstack/cookbook-openstack-ops-database.git
+    revision: 1886e38a03004b0da935ef00197ec159d475c457
+  openstack-ops-messaging
+    git: git://github.com/openstack/cookbook-openstack-ops-messaging.git
+    revision: ce02b068eb2cd129df2307c14e364593fec0f29e
+  openstack-orchestration
+    git: git://github.com/openstack/cookbook-openstack-orchestration.git
+    revision: b5fac0e02b5f5c541c6a16fe31ab8478c521db73
+  openstack-telemetry
+    git: git://github.com/openstack/cookbook-openstack-telemetry.git
+    revision: 7b4eed9eb593fce821dc007a1ad158166a5c94bd
+  openstack_client
+    git: git://github.com/openstack/cookbook-openstack-client.git
+    revision: 8cfa80e9cba0878ca8c01357729108ad6af26df4
+  postgresql (= 3.4.18)
+  python (= 1.4.6)
+  rabbitmq (= 4.0.1)
+  selinux (= 0.9.0)
+  statsd
+    git: git://github.com/att-cloud/cookbook-statsd.git
+    revision: d3298ae4ec4a6d8cc2ca166f0688a92753ced338
+  xfs (= 1.1.0)
+  yum (= 3.5.4)
+  yum-epel (= 0.6.0)
+
+GRAPH
+  apache2 (3.1.0)
+  apt (2.6.1)
+  aws (2.1.1)
+  build-essential (2.1.3)
+  ceph (0.8.0)
+    apache2 (>= 1.1.12)
+    apt (>= 0.0.0)
+    yum (>= 3.0)
+    yum-epel (>= 0.0.0)
+  chef-sugar (3.1.1)
+  chef_handler (1.2.0)
+  database (4.0.2)
+    postgresql (>= 1.0.0)
+  dmg (2.2.2)
+  erlang (1.5.8)
+    apt (>= 1.7.0)
+    build-essential (>= 0.0.0)
+    yum (~> 3.0)
+    yum-epel (>= 0.0.0)
+    yum-erlang_solutions (>= 0.0.0)
+  galera (0.4.1)
+  git (4.2.2)
+    build-essential (>= 0.0.0)
+    dmg (>= 0.0.0)
+    windows (>= 0.0.0)
+    yum-epel (>= 0.0.0)
+  mariadb (0.3.0)
+    apt (>= 0.0.0)
+    yum (>= 0.0.0)
+    yum-epel (>= 0.0.0)
+  memcached (1.7.2)
+    runit (~> 1.0)
+    yum (~> 3.0)
+    yum-epel (>= 0.0.0)
+  mysql (6.0.13)
+    smf (>= 0.0.0)
+    yum-mysql-community (>= 0.0.0)
+  mysql2_chef_gem (1.0.1)
+    build-essential (>= 0.0.0)
+    mariadb (>= 0.0.0)
+    mysql (>= 0.0.0)
+  openssl (4.0.0)
+    chef-sugar (>= 0.0.0)
+  openstack-bare-metal (11.0.0)
+    openstack-common (>= 11.5.0)
+    openstack-identity (>= 11.0.0)
+  openstack-block-storage (11.1.0)
+    apt (~> 2.6.1)
+    ceph (~> 0.8.0)
+    openstack-common (>= 11.5.0)
+    openstack-identity (>= 11.0.0)
+    openstack-image (>= 11.0.0)
+    python (~> 1.4.6)
+    selinux (~> 0.9.0)
+  openstack-common (11.5.1)
+    apt (~> 2.6.1)
+    database (~> 4.0.2)
+    galera (~> 0.4.1)
+    mariadb (~> 0.3.0)
+    mysql (~> 6.0.13)
+    yum (~> 3.5.4)
+    yum-epel (~> 0.6.0)
+  openstack-compute (11.0.0)
+    ceph (~> 0.8.0)
+    openstack-bare-metal (>= 11.0.0)
+    openstack-common (>= 11.5.0)
+    openstack-identity (>= 11.0.0)
+    openstack-image (>= 11.0.0)
+    openstack-network (>= 11.0.0)
+    python (~> 1.4.6)
+    selinux (~> 0.9.0)
+  openstack-dashboard (11.0.0)
+    apache2 (~> 3.1)
+    openstack-common (>= 11.1.0)
+  openstack-data-processing (11.0.0)
+  openstack-database (11.0.0)
+    openstack-common (>= 11.0.0)
+    openstack-identity (>= 11.0.0)
+  openstack-hacks (0.1.7)
+    yum (>= 0.0.0)
+  openstack-identity (11.1.0)
+    apache2 (~> 3.1.0)
+    openstack-common (>= 11.5.0)
+  openstack-image (11.0.0)
+    ceph (~> 0.8.0)
+    openstack-common (>= 11.5.0)
+    openstack-identity (>= 11.0.0)
+  openstack-integration-test (11.0.0)
+    openstack-block-storage (>= 11.0.0)
+    openstack-common (>= 11.5.0)
+    openstack-compute (>= 11.0.0)
+    openstack-identity (>= 11.0.0)
+    openstack-image (>= 11.0.0)
+  openstack-network (11.0.0)
+    openstack-common (>= 11.5.0)
+    openstack-identity (>= 11.0.0)
+  openstack-object-storage (11.0.0)
+    memcached (>= 1.7.2)
+    openstack-common (>= 11.0.0)
+    openstack-identity (>= 11.0.0)
+    statsd (>= 0.1.5)
+  openstack-ops-database (11.0.0)
+    database (~> 4.0.2)
+    mariadb (~> 0.3.0)
+    mysql (~> 6.0.13)
+    mysql2_chef_gem (~> 1.0.1)
+    openstack-common (>= 11.0.0)
+    postgresql (~> 3.4.18)
+  openstack-ops-messaging (11.1.0)
+    openstack-common (>= 11.0.0)
+    rabbitmq (~> 4.0)
+  openstack-orchestration (11.0.0)
+    openstack-common (>= 11.5.0)
+    openstack-identity (>= 11.0.0)
+  openstack-telemetry (11.0.0)
+    openstack-common (>= 11.5.0)
+    openstack-compute (>= 11.0.0)
+    openstack-identity (>= 11.0.0)
+  openstack_client (11.0.0)
+    apt (~> 2.6.1)
+    build-essential (~> 2.1.3)
+    xml (~> 1.2.13)
+    yum (~> 3.5.4)
+  packagecloud (0.0.19)
+  postgresql (3.4.18)
+    apt (>= 1.9.0)
+    build-essential (>= 0.0.0)
+    openssl (~> 4.0.0)
+  python (1.4.6)
+    build-essential (>= 0.0.0)
+    yum-epel (>= 0.0.0)
+  rabbitmq (4.0.1)
+    erlang (~> 1.5.0)
+    yum-epel (>= 0.0.0)
+    yum-erlang_solutions (>= 0.0.0)
+  rbac (1.0.3)
+  runit (1.7.2)
+    packagecloud (>= 0.0.0)
+  selinux (0.9.0)
+  smf (2.2.7)
+    rbac (>= 1.0.1)
+  statsd (0.1.6)
+    build-essential (>= 0.0.0)
+    git (>= 0.0.0)
+  windows (1.37.0)
+    chef_handler (>= 0.0.0)
+  xfs (1.1.0)
+  xml (1.2.13)
+    build-essential (>= 0.0.0)
+    chef-sugar (>= 0.0.0)
+  yum (3.5.4)
+  yum-epel (0.6.0)
+    yum (~> 3.0)
+  yum-erlang_solutions (0.2.0)
+    yum (~> 3.0)
+  yum-mysql-community (0.1.17)
+    yum (>= 3.0)
