@@ -1,0 +1,14 @@
+{
+  "name": "attribs",
+  "description": "attribs role",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "attributes": {
+      "lvl_4": "Default value from: lvl_4 attribs roles file"
+    }
+  },
+  "run_list": [
+    
+  ]
+}
