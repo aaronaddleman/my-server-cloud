@@ -26,8 +26,8 @@ SCRIPT
 
 # management console
 $management_console = <<SCRIPT
-chef-server-ctl install opscode-manage
-opscode-manage-ctl reconfigure
+chef-server-ctl install chef-manage
+chef-manage-ctl reconfigure
 chef-server-ctl reconfigure
 SCRIPT
 
@@ -88,7 +88,7 @@ Vagrant.configure(2) do |config|
   end
 
   # chef server
-  config.vm.define :chef_server_centos66 do |chef_server|
+  config.vm.define :chef_server do |chef_server|
     chef_server.vm.box = "chef/centos-6.6"
     chef_server.vm.network "private_network", ip: "192.168.0.10"
     chef_server.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
@@ -99,7 +99,7 @@ Vagrant.configure(2) do |config|
     chef_server.vm.provision :chef_solo do |chef|
 
       chef.add_recipe "chef-server"
-      chef.log_level = "debug"
+      #chef.log_level = "debug"
       chef.cookbooks_path = Chef::Config[:cookbook_path]
       chef.roles_path = Chef::Config[:role_path]
       chef.data_bags_path = Chef::Config[:data_bag_path]
@@ -110,19 +110,19 @@ Vagrant.configure(2) do |config|
     end
 
     # user_and_org
-    chef_server.vm.provision "shell", inline: $user_and_org 
+    chef_server.vm.provision "shell", inline: $user_and_org
 
     # management console
-    chef_server.vm.provision "shell", inline: $management_console 
+    chef_server.vm.provision "shell", inline: $management_console
 
     # push jobs
-    #chef_server.vm.provision "shell", inline: $push_jobs 
+    #chef_server.vm.provision "shell", inline: $push_jobs
 
     # replication
-    #chef_server.vm.provision "shell", inline: $replication 
+    #chef_server.vm.provision "shell", inline: $replication
 
     # chef reporting
-    #chef_server.vm.provision "shell", inline: $reporting 
+    #chef_server.vm.provision "shell", inline: $reporting
   end
 
   # dev station
@@ -235,7 +235,7 @@ Vagrant.configure(2) do |config|
       chef.chef_server_url = "https://192.168.0.10/organizations/openstack"
       chef.validation_key_path = "#{current_dir}/.chef/openstack-validator.pem"
       chef.validation_client_name = "openstack-validator"
-     
+
       chef.add_role("allinone-compute")
       chef.add_role("os-image-upload")
       #chef.add_recipe "openstack-hacks::default"

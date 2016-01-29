@@ -3,12 +3,12 @@
   "description": "attribs role",
   "chef_type": "role",
   "json_class": "Chef::Role",
-  "default_attributes": {
+  "override_attributes": {
     "attributes": {
-      "lvl_4": "Default value from: lvl_4 attribs roles file"
+      "lvl_04": "Default value from: lvl_04 attribs roles file"
     }
   },
   "run_list": [
-    
+
   ]
 }

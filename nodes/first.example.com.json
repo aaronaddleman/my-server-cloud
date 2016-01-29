@@ -1,8 +1,8 @@
 {
   "name": "first.example.com",
-  "chef_environment": "attribs",
+  "chef_environment": "_default",
   "run_list": [
-    "role[attribs]"
+    "recipe[chefsearch]"
   ],
   "normal": {
 
