@@ -4,6 +4,20 @@ The purpose of this project is to have a playground for various setups.
 
 ## Installation
 
+Versions used:
+
+Vagrant 1.7.4
+Chef Development Kit Version: 0.10.0
+chef-client version: 12.5.1
+berks version: 4.0.1
+kitchen version: 1.4.2
+
+22:40:47 (master U:1 ✗) my-server-cloud vagrant plugin list
+chef (12.3.0)
+vagrant-cachier (1.2.0)
+vagrant-share (1.1.4, system)
+
+
 1. clone
 1. bundle install
 1. vagrant plugin install chef
