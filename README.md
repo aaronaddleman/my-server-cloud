@@ -17,6 +17,7 @@ chef (12.3.0)
 vagrant-cachier (1.2.0)
 vagrant-share (1.1.4, system)
 
+http://www.xquartz.org/
 
 1. clone
 1. bundle install
