@@ -4,25 +4,24 @@ The purpose of this project is to have a playground for various setups.
 
 ## Installation
 
-Versions used:
 
-Vagrant 1.7.4
-Chef Development Kit Version: 0.10.0
-chef-client version: 12.5.1
-berks version: 4.0.1
-kitchen version: 1.4.2
-
-22:40:47 (master U:1 ✗) my-server-cloud vagrant plugin list
-chef (12.3.0)
-vagrant-cachier (1.2.0)
-vagrant-share (1.1.4, system)
-
-http://www.xquartz.org/
-
-1. clone
+1. git clone https://github.com/aaronaddleman/my-server-cloud.git
+1. git submodule init
+1. git submodule update
 1. bundle install
 1. vagrant plugin install chef
+1. vagrant plugin install vagrant-vbguest
 1. berks vendor cookbooks
+
+## Credentials
+
+Locate the line below and change to what you like:
+
+```
+chef-server-ctl user-create aaddleman Aaron Addleman aaronaddleman@gmail.com changeme --filename /mnt/dot_chef/aaddleman.pem
+```
+
+The above line creates an account of `aaronaddleman@gmail.com` with the password of `changeme` to be used for authenticating with the console of Chef.
 
 ## Current state
 
@@ -46,8 +45,10 @@ When making changes to a role, you can update the chef server with the command:
 knife role from file roles/router.json
 ```
 
-## Getting cookbook updates
-
 1. after cloaning repo
 1. git submodule init
 1. git submodule update
+
+## Updating cookbooks
+
+TODO
