@@ -12,6 +12,13 @@ The purpose of this project is to have a playground for various setups.
 1. vagrant plugin install chef
 1. vagrant plugin install vagrant-vbguest
 1. berks vendor cookbooks
+1. vagrant up chef_server
+1. (let install run)
+1. At the end, you should be able to visit `http://192.168.0.10`
+1. Login with your selected credentials
+1. To make nodes:
+1. vagrant up chef_first_client
+1. vagrant up chef_second_client
 
 ## Credentials
 
