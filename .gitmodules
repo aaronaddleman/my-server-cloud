@@ -4,3 +4,6 @@
 [submodule "cookbooks/chef-server"]
 	path = cookbooks/chef-server
 	url = https://github.com/chef-cookbooks/chef-server.git
+[submodule "cookbooks/chef-ingredient"]
+	path = cookbooks/chef-ingredient
+	url = https://github.com/chef-cookbooks/chef-ingredient.git
