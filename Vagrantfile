@@ -89,7 +89,7 @@ Vagrant.configure(2) do |config|
 
   # chef server
   config.vm.define :chef_server do |chef_server|
-    chef_server.vm.box = "chef/centos-6.6"
+    chef_server.vm.box = "centos/6"
     chef_server.vm.network "private_network", ip: "192.168.0.10"
     chef_server.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
     chef_server.vm.network "forwarded_port", guest: 443, host: 8443, auto_correct: true
@@ -128,7 +128,7 @@ Vagrant.configure(2) do |config|
   # dev station
   config.vm.define :chef_dev do |chef_client|
     chef_client.vm.hostname = "dev.example.com"
-    chef_client.vm.box = "chef/centos-6.6"
+    chef_client.vm.box = "centos/6"
     chef_client.vm.network "private_network", ip: "192.168.0.20"
     chef_client.vm.synced_folder ".chef/", "/mnt/.chef"
     chef_client.vm.synced_folder "cookbooks/", "/mnt/cookbook"
@@ -152,7 +152,7 @@ Vagrant.configure(2) do |config|
   # first client
 
   config.vm.define :chef_first_client do |chef_client|
-    chef_client.vm.box = "chef/centos-6.6"
+    chef_client.vm.box = "centos/6"
     chef_client.vm.network "private_network", ip: "192.168.0.21"
 
     chef_client.vm.provision :chef_client do |chef|
@@ -169,7 +169,7 @@ Vagrant.configure(2) do |config|
 
   # second client
   config.vm.define :chef_second_client do |chef_client|
-    chef_client.vm.box = "chef/centos-6.6"
+    chef_client.vm.box = "centos/6"
     chef_client.vm.network "private_network", ip: "192.168.0.22"
 
     chef_client.vm.provision :chef_client do |chef|
@@ -185,7 +185,7 @@ Vagrant.configure(2) do |config|
   # router client
   config.vm.define :chef_router_client do |chef_client|
     chef_client.vm.hostname = "router.example.com"
-    chef_client.vm.box = "chef/centos-6.6"
+    chef_client.vm.box = "centos/6"
     chef_client.vm.network "private_network", ip: "192.168.0.2"
     chef_client.vm.network "private_network", ip: "192.168.0.3"
     chef_client.vm.network "private_network", ip: "192.168.20.2"
@@ -205,7 +205,7 @@ Vagrant.configure(2) do |config|
   # router client
   config.vm.define :chef_host1_client do |chef_client|
     chef_client.vm.hostname = "host1.example.com"
-    chef_client.vm.box = "chef/centos-6.6"
+    chef_client.vm.box = "centos/6"
     chef_client.vm.network "private_network", ip: "192.168.20.20"
 
     chef_client.vm.provision :chef_client do |chef|
@@ -222,7 +222,7 @@ Vagrant.configure(2) do |config|
   # openstack all in one
   config.vm.define :openstack_aio do |chef_client|
     chef_client.vm.hostname = "openstack.example.com"
-    chef_client.vm.box = "chef/centos-7.0"
+    chef_client.vm.box = "centos/7"
     chef_client.vm.network "public_network", ip: "192.168.20.20"
     chef_client.vm.network "public_network", ip: "192.168.200.2"
     chef_client.vm.network "public_network", ip: "192.168.300.2"
