@@ -27,8 +27,8 @@ SCRIPT
 # management console
 $management_console = <<SCRIPT
 chef-server-ctl install chef-manage
-chef-manage-ctl reconfigure
 chef-server-ctl reconfigure
+chef-manage-ctl reconfigure --accept-license
 SCRIPT
 
 # push jobs
