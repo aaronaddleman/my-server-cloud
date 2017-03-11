@@ -1,3 +1,6 @@
 [submodule "cookbooks/attributes"]
 	path = cookbooks/attributes
 	url = git@github.com:aaronaddleman-cookbooks/attributes.git
+[submodule "cookbooks/chef-server"]
+	path = cookbooks/chef-server
+	url = https://github.com/chef-cookbooks/chef-server.git
